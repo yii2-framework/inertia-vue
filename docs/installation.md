@@ -40,7 +40,9 @@ Enable the Vue adapter in your web configuration:
 ```php
 // config/web.php
 return [
-    'bootstrap' => [\yii\inertia\vue\Bootstrap::class],
+    'bootstrap' => [
+        \yii\inertia\vue\Bootstrap::class,
+    ],
 ];
 ```
 

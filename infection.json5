@@ -53,7 +53,9 @@
         // `(string)` cast on `$importedChunk['file']` is redundant because
         // `getManifestChunk()` already validates the value is a string.
         CastString: {
-            ignoreSourceCodeByRegex: [".*\\(string\\) \\$importedChunk\\['file'\\].*"],
+            ignoreSourceCodeByRegex: [
+                ".*\\(string\\) \\$importedChunk\\['file'\\].*",
+            ],
         },
 
         // `ltrim($path, '/')` guards against leading slashes in manifest

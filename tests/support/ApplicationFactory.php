@@ -43,7 +43,7 @@ final class ApplicationFactory
     }
 
     /**
-     * Creates a console application with the Vue bootstrap configured.
+     * Returns the base configuration for a web application with the Vue bootstrap configured.
      *
      * @phpstan-return array<string, mixed>
      */
@@ -74,7 +74,7 @@ final class ApplicationFactory
                     'isConsoleRequest' => false,
                 ],
             ],
-            'vendorPath' =>  dirname(__DIR__, 2),
+            'vendorPath' => dirname(__DIR__, 2) . '/vendor',
         ];
     }
 }

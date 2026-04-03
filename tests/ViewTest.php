@@ -58,6 +58,7 @@ final class ViewTest extends TestCase
 
         Inertia::render('Dashboard', ['stats' => ['visits' => 42]]);
     }
+
     public function testVueRootViewRendersViteTagsAndPagePayload(): void
     {
         $this->setAbsoluteUrl('/dashboard');

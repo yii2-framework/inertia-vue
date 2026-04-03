@@ -49,7 +49,7 @@ final class BootstrapTest extends TestCase
     public function testBootstrapRegistersAliasAndVueComponent(): void
     {
         self::assertSame(
-            dirname(__DIR__) . '/src',
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src',
             Yii::getAlias('@inertia-vue'),
             'Bootstrap should register the @inertia-vue alias pointing to the src/ directory.',
         );
