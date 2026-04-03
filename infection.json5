@@ -9,4 +9,67 @@
     source: {
         directories: ["src"],
     },
+    mutators: {
+        "@default": true,
+
+        // Removing the early-return from the manifest cache simply re-reads
+        // the same file and produces identical output.
+        ReturnRemoval: {
+            ignoreSourceCodeByRegex: [".*return \\$this->manifest;.*"],
+        },
+
+        // Exception code `0` is the default and never inspected by callers.
+        // Changing it to -1 or 1 is semantically irrelevant.
+        DecrementInteger: {
+            ignoreSourceCodeByRegex: [".*0,$"],
+        },
+        IncrementInteger: {
+            ignoreSourceCodeByRegex: [".*0,$"],
+        },
+
+        // `array_key_exists` checks for key presence regardless of value.
+        // Changing `$seen[x] = true` to `$seen[x] = false` is equivalent.
+        TrueValue: {
+            ignoreSourceCodeByRegex: [
+                ".*\\$seen\\[\\$import\\] = true;.*",
+                ".*\\$preloadSeen\\[\\$preloadFile\\] = true;.*",
+                ".*\\$cssSeen\\[\\$cssFile\\] = true;.*",
+                ".*\\$scriptSeen\\[\\$file\\] = true;.*",
+            ],
+        },
+
+        // `array_values` only reindexes the array. The result is consumed by
+        // `foreach` which iterates identically with or without reindexing.
+        UnwrapArrayValues: {
+            ignoreSourceCodeByRegex: [".*array_values\\(array_unique.*"],
+        },
+
+        // `array_unique` is redundant when downstream dedup (`$scriptSeen`,
+        // `$cssSeen`) already prevents duplicate output tags.
+        UnwrapArrayUnique: {
+            ignoreSourceCodeByRegex: [".*array_unique\\(array_filter.*"],
+        },
+
+        // `(string)` cast on `$importedChunk['file']` is redundant because
+        // `getManifestChunk()` already validates the value is a string.
+        CastString: {
+            ignoreSourceCodeByRegex: [
+                ".*\\(string\\) \\$importedChunk\\['file'\\].*",
+            ],
+        },
+
+        // `ltrim($path, '/')` guards against leading slashes in manifest
+        // asset paths. Vite manifests never produce leading slashes in
+        // practice, making the trim a no-op.
+        UnwrapLtrim: {
+            ignoreSourceCodeByRegex: [".*ltrim\\(\\$path, '/'\\).*"],
+        },
+
+        // `return $chunks` is always an empty array at this point
+        // because the guard fires before any items are added.
+        // `array_slice([], 0, 1)` produces the same empty array.
+        ArrayOneItem: {
+            ignoreSourceCodeByRegex: [".*return \\$chunks;.*"],
+        },
+    },
 }
