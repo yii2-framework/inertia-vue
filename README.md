@@ -84,27 +84,27 @@ npm install vue @vitejs/plugin-vue @inertiajs/vue3 vite
 Then create your client entrypoint, for example `resources/js/app.js`:
 
 ```js
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
+import { createApp, h } from "vue";
+import { createInertiaApp } from "@inertiajs/vue3";
 
 createInertiaApp({
     resolve: (name) => {
-        const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-        return pages[`./Pages/${name}.vue`]
+        const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
+        return pages[`./Pages/${name}.vue`];
     },
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
-            .mount(el)
+            .mount(el);
     },
-})
+});
 ```
 
 ## Production asset integration
 
 This package expects a Vite manifest file generated with `build.manifest = true`. In production it will render:
 
-1. stylesheet tags for the entrypoint chunk and its imported chunks;
+1. style sheet tags for the entrypoint chunk and its imported chunks;
 2. module entry scripts for each entrypoint;
 3. optional `modulepreload` tags for imported JavaScript chunks.
 
