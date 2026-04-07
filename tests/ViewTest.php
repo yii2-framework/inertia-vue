@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace yii\inertia\vue\tests;
 
 use Yii;
-use yii\base\Component;
-use yii\base\InvalidConfigException;
-use yii\inertia\Inertia;
+use yii\base\{Component, InvalidConfigException};
+use yii\inertia\{Inertia, Vite};
 use yii\inertia\vue\Bootstrap;
-use yii\inertia\vue\Vite;
-use yii\web\Application;
-use yii\web\Response;
+use yii\web\{Application, Response};
 
 /**
  * Integration tests for the Vue root view and the base Inertia package.
@@ -28,20 +25,20 @@ final class ViewTest extends TestCase
         new Application(
             [
                 'id' => 'testapp',
+                'aliases' => [
+                    '@tests' => dirname(__DIR__) . '/tests',
+                ],
                 'basePath' => dirname(__DIR__) . '/tests',
                 'bootstrap' => [
                     Bootstrap::class,
-                ],
-                'aliases' => [
-                    '@tests' => dirname(__DIR__) . '/tests',
                 ],
                 'components' => [
                     'request' => [
                         'cookieValidationKey' => 'test',
                         'hostInfo' => 'https://example.test',
+                        'isConsoleRequest' => false,
                         'scriptFile' => dirname(__DIR__) . '/index.php',
                         'scriptUrl' => '/index.php',
-                        'isConsoleRequest' => false,
                     ],
                 ],
                 'vendorPath' => dirname(__DIR__) . '/vendor',
@@ -52,9 +49,10 @@ final class ViewTest extends TestCase
         Yii::$app->set('inertiaVue', new Component());
 
         $this->setAbsoluteUrl('/dashboard');
-
         $this->expectException(InvalidConfigException::class);
-        $this->expectExceptionMessage(Vite::class);
+        $this->expectExceptionMessage(
+            "The 'inertiaVue' application component must be an instance of " . Vite::class . '.',
+        );
 
         Inertia::render('Dashboard', ['stats' => ['visits' => 42]]);
     }

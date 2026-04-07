@@ -85,8 +85,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * Sets the current absolute request URL for tests.
      *
-     * @param string $url URL to set as the current request URL. This should be a path relative to the host,
-     * for example, '/test'.
+     * @param string $url URL to set as the current request URL. This should be a path relative to the host, for
+     * example, '/test'.
      */
     protected function setAbsoluteUrl(string $url): void
     {
