@@ -6,8 +6,8 @@ namespace yii\inertia\vue\tests\support;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\inertia\Vite;
 use yii\inertia\vue\Bootstrap;
-use yii\inertia\vue\Vite;
 use yii\web\Application;
 
 /**
@@ -18,6 +18,9 @@ use yii\web\Application;
  */
 final class ApplicationFactory
 {
+    /**
+     * A random string used as the cookie validation key for test applications.
+     */
     private const COOKIE_VALIDATION_KEY = 'test-cookie-validation-key';
 
     /**
@@ -35,7 +38,7 @@ final class ApplicationFactory
     /**
      * Creates a web application with the Vue bootstrap configured.
      *
-     * @param array<string, mixed> $override
+     * @param array<string, mixed> $override Configuration values to override the defaults with.
      */
     public static function web(array $override = []): void
     {
@@ -44,6 +47,8 @@ final class ApplicationFactory
 
     /**
      * Returns the base configuration for a web application with the Vue bootstrap configured.
+     *
+     * @return array Base configuration array for a web application with the Vue bootstrap configured.
      *
      * @phpstan-return array<string, mixed>
      */
@@ -62,16 +67,18 @@ final class ApplicationFactory
             'components' => [
                 'inertiaVue' => [
                     'class' => Vite::class,
-                    'manifestPath' => '@tests/data/build/.vite/manifest.json',
                     'baseUrl' => '@web/build',
-                    'entrypoints' => ['resources/js/app.js'],
+                    'entrypoints' => [
+                        'resources/js/app.js',
+                    ],
+                    'manifestPath' => '@tests/data/build/.vite/manifest.json',
                 ],
                 'request' => [
                     'cookieValidationKey' => self::COOKIE_VALIDATION_KEY,
                     'hostInfo' => 'https://example.test',
+                    'isConsoleRequest' => false,
                     'scriptFile' => dirname(__DIR__, 2) . '/index.php',
                     'scriptUrl' => '/index.php',
-                    'isConsoleRequest' => false,
                 ],
             ],
             'vendorPath' => dirname(__DIR__, 2) . '/vendor',

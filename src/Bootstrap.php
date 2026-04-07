@@ -6,13 +6,14 @@ namespace yii\inertia\vue;
 
 use Yii;
 use yii\base\BootstrapInterface;
-use yii\inertia\Manager;
+use yii\inertia\{Manager, Vite};
 
 /**
  * Bootstraps the Vue adapter for yii2-framework/inertia.
  *
- * Delegates the base Inertia bootstrap, registers the `@inertia-vue` alias, ensures the `inertiaVue` helper component
- * is available, and switches the default Inertia root view to the Vue-aware view shipped by this package.
+ * Delegates the base Inertia bootstrap, registers the `@inertia-vue` alias, registers the canonical
+ * {@see \yii\inertia\Vite} renderer under the `inertiaVue` component id (without any framework-specific preamble), and
+ * switches the default Inertia root view to the Vue-aware view shipped by this package.
  *
  * @author Wilmer Arambula <terabytesoftw@gmail.com>
  * @since 0.1

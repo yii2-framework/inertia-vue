@@ -5,15 +5,19 @@
 ```php
 // config/web.php
 return [
-    'bootstrap' => [\yii\inertia\vue\Bootstrap::class],
+    'bootstrap' => [
+        \yii\inertia\vue\Bootstrap::class,
+    ],
     'components' => [
         'inertiaVue' => [
-            'class' => \yii\inertia\vue\Vite::class,
-            'manifestPath' => '@webroot/build/.vite/manifest.json',
+            'class' => \yii\inertia\Vite::class,
             'baseUrl' => '@web/build',
-            'entrypoints' => ['resources/js/app.js'],
             'devMode' => YII_ENV_DEV,
             'devServerUrl' => 'http://localhost:5173',
+            'entrypoints' => [
+                'resources/js/app.js',
+            ],
+            'manifestPath' => '@webroot/build/.vite/manifest.json',
         ],
     ],
 ];

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
-use yii\inertia\Page;
-use yii\inertia\vue\Vite;
+use yii\inertia\{Page, Vite};
 use yii\web\View;
 
 /**
@@ -14,12 +13,11 @@ use yii\web\View;
  * @var string $pageJson
  * @var View $this
  */
-
 $vite = Yii::$app->get('inertiaVue');
 
 if (!$vite instanceof Vite) {
     throw new InvalidConfigException(
-        'The "inertiaVue" application component must be an instance of ' . Vite::class . '.',
+        "The 'inertiaVue' application component must be an instance of " . Vite::class . '.',
     );
 }
 

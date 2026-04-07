@@ -12,15 +12,17 @@ Enable the package through the application bootstrap and configure the component
 ```php
 // config/web.php
 return [
-    'bootstrap' => [\yii\inertia\vue\Bootstrap::class],
+    'bootstrap' => [
+        \yii\inertia\vue\Bootstrap::class,
+    ],
     'components' => [
         'inertiaVue' => [
-            'class' => \yii\inertia\vue\Vite::class,
-            'manifestPath' => '@webroot/build/.vite/manifest.json',
+            'class' => \yii\inertia\Vite::class,
             'baseUrl' => '@web/build',
-            'entrypoints' => ['resources/js/app.js'],
             'devMode' => YII_ENV_DEV,
             'devServerUrl' => 'http://localhost:5173',
+            'entrypoints' => ['resources/js/app.js'],
+            'manifestPath' => '@webroot/build/.vite/manifest.json',
             'modulePreload' => true,
         ],
     ],
@@ -29,17 +31,9 @@ return [
 
 ## Properties
 
-### `manifestPath`
-
-Path to the Vite manifest file. Supports Yii aliases. Defaults to `@webroot/build/.vite/manifest.json`.
-
 ### `baseUrl`
 
 Base URL prefix for built assets referenced by the Vite manifest. Supports Yii aliases. Defaults to `@web/build`.
-
-### `entrypoints`
-
-One or more Vite entrypoints that should be rendered in the root view. Defaults to `['resources/js/app.js']`.
 
 ### `devMode`
 
@@ -50,9 +44,17 @@ Defaults to `false`.
 
 Base URL of the Vite dev server. Required when `devMode` is `true`. Example: `http://localhost:5173`.
 
+### `entrypoints`
+
+One or more Vite entrypoints that should be rendered in the root view. Defaults to `['resources/js/app.js']`.
+
 ### `includeViteClient`
 
 Controls whether the `@vite/client` script should be included in development mode. Defaults to `true`.
+
+### `manifestPath`
+
+Path to the Vite manifest file. Supports Yii aliases. Defaults to `@webroot/build/.vite/manifest.json`.
 
 ### `modulePreload`
 

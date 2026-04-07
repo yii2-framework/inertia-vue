@@ -4,16 +4,11 @@ declare(strict_types=1);
 
 namespace yii\inertia\vue\tests\support;
 
-use PHPUnit\Event\Test\PreparationStarted;
-use PHPUnit\Event\Test\PreparationStartedSubscriber;
-use PHPUnit\Event\TestSuite\Started;
-use PHPUnit\Event\TestSuite\StartedSubscriber;
-use PHPUnit\Runner\Extension\Extension;
-use PHPUnit\Runner\Extension\Facade;
-use PHPUnit\Runner\Extension\ParameterCollection;
+use PHPUnit\Event\Test\{PreparationStarted, PreparationStartedSubscriber};
+use PHPUnit\Event\TestSuite\{Started, StartedSubscriber};
+use PHPUnit\Runner\Extension\{Extension, Facade, ParameterCollection};
 use PHPUnit\TextUI\Configuration\Configuration;
-use Xepozz\InternalMocker\Mocker;
-use Xepozz\InternalMocker\MockerState;
+use Xepozz\InternalMocker\{Mocker, MockerState};
 use yii\inertia\vue\tests\support\stub\MockerFunctions;
 
 /**
@@ -46,7 +41,7 @@ final class MockerExtension implements Extension
     {
         $mocks = [
             [
-                'namespace' => 'yii\inertia\vue',
+                'namespace' => 'yii\inertia',
                 'name' => 'file_get_contents',
                 'function' => static fn(
                     string $filename,

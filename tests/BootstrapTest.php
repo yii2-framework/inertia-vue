@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace yii\inertia\vue\tests;
 
 use Yii;
-use yii\inertia\Manager;
+use yii\inertia\{Manager, Vite};
 use yii\inertia\vue\Bootstrap;
-use yii\inertia\vue\Vite;
 use yii\web\Application;
 
 /**
@@ -20,7 +19,6 @@ final class BootstrapTest extends TestCase
 {
     public function testBootstrapPreservesCustomInertiaRootView(): void
     {
-        $this->destroyApplication();
         $this->mockWebApplication(
             [
                 'components' => [
@@ -62,8 +60,6 @@ final class BootstrapTest extends TestCase
 
     public function testBootstrapRegistersDefaultVueComponentWhenNotConfigured(): void
     {
-        $this->destroyApplication();
-
         new Application(
             [
                 'id' => 'testapp',
@@ -78,9 +74,9 @@ final class BootstrapTest extends TestCase
                     'request' => [
                         'cookieValidationKey' => 'test',
                         'hostInfo' => 'https://example.test',
+                        'isConsoleRequest' => false,
                         'scriptFile' => dirname(__DIR__) . '/index.php',
                         'scriptUrl' => '/index.php',
-                        'isConsoleRequest' => false,
                     ],
                 ],
                 'vendorPath' => dirname(__DIR__) . '/vendor',
