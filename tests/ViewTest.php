@@ -20,6 +20,8 @@ final class ViewTest extends TestCase
 {
     public function testThrowInvalidConfigExceptionForNonViteComponent(): void
     {
+        $this->destroyApplication();
+
         new Application(
             [
                 'id' => 'testapp',

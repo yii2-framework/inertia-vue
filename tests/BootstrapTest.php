@@ -19,6 +19,7 @@ final class BootstrapTest extends TestCase
 {
     public function testBootstrapPreservesCustomInertiaRootView(): void
     {
+        $this->destroyApplication();
         $this->mockWebApplication(
             [
                 'components' => [
@@ -60,6 +61,8 @@ final class BootstrapTest extends TestCase
 
     public function testBootstrapRegistersDefaultVueComponentWhenNotConfigured(): void
     {
+        $this->destroyApplication();
+
         new Application(
             [
                 'id' => 'testapp',
