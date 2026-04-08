@@ -9,3 +9,4 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - feat: initial `yii2-framework/inertia-vue` package structure.
 - refactor: register canonical `yii\inertia\Vite` via `Bootstrap`; remove the Vue-specific subclass.
 - fix: update StyleCI badge link in `README.md` and update PHPDoc in `app.php` view.
+- docs: improve documentation clarity and consistency across multiple files.

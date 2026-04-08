@@ -4,7 +4,7 @@
 
 This package is a thin adapter over `yii2-framework/inertia`.
 
-It intentionally does not include:
+It intentionally does not include.
 
 - Vue single-file components for your application pages.
 - npm dependency installation.
@@ -14,7 +14,7 @@ It intentionally does not include:
 ## Adapter responsibility
 
 The PHP-side responsibility of this package is to connect the base Inertia server package with a Vue/Vite frontend by
-providing:
+providing.
 
 - a Vue-oriented bootstrap class;
 - a root view that renders the page payload and asset tags;

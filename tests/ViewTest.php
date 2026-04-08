@@ -11,14 +11,17 @@ use yii\inertia\vue\Bootstrap;
 use yii\web\{Application, Response};
 
 /**
- * Integration tests for the Vue root view and the base Inertia package.
+ * Unit tests for {@see \yii\inertia\vue\Bootstrap}.
+ *
+ * Integration coverage for the Vue-aware root view registered by the Vue Bootstrap and rendered through the base
+ * Inertia Manager.
  *
  * @author Wilmer Arambula <terabytesoftw@gmail.com>
  * @since 0.1
  */
 final class ViewTest extends TestCase
 {
-    public function testThrowInvalidConfigExceptionForNonViteComponent(): void
+    public function testThrowInvalidConfigExceptionWhenNonViteComponent(): void
     {
         $this->destroyApplication();
 

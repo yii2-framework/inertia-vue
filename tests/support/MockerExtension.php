@@ -14,11 +14,27 @@ use yii\inertia\vue\tests\support\stub\MockerFunctions;
 /**
  * PHPUnit extension that registers internal-function mocks for test execution.
  *
+ * Subscribes to PHPUnit's test lifecycle via {@see \PHPUnit\Runner\Extension\Facade} so a curated set of built-in
+ * PHP functions (for example, `file_get_contents`) are redirected through {@see \Xepozz\InternalMocker\Mocker} and can
+ * be deterministically controlled from {@see MockerFunctions} during each test run.
+ *
  * @author Wilmer Arambula <terabytesoftw@gmail.com>
  * @since 0.1
  */
 final class MockerExtension implements Extension
 {
+    /**
+     * Registers the internal-function mocks on the PHPUnit runner.
+     *
+     * Subscribes to two lifecycle events:
+     *
+     * - Loads the mock definitions and saves the initial {@see MockerState} snapshot.
+     * - Restores the mocker state before every test so mutations from the previous test never leak across cases.
+     *
+     * @param Configuration $configuration PHPUnit configuration (unused; kept for interface compliance).
+     * @param Facade $facade Subscriber facade used to register lifecycle listeners.
+     * @param ParameterCollection $parameters Extension-specific parameters (unused).
+     */
     public function bootstrap(Configuration $configuration, Facade $facade, ParameterCollection $parameters): void
     {
         $facade->registerSubscribers(
@@ -37,6 +53,14 @@ final class MockerExtension implements Extension
         );
     }
 
+    /**
+     * Loads the internal-function mocks into {@see \Xepozz\InternalMocker\Mocker} and saves the resulting state.
+     *
+     * Must be called exactly once during suite bootstrap. {@see \Xepozz\InternalMocker\Mocker::load()} uses
+     * `require_once` internally to include the generated mocks file, so subsequent invocations will not re-register
+     * mocks even if the definitions change. The function stubs forward their arguments to the {@see MockerFunctions}
+     * hooks so individual tests can drive deterministic return values or exceptions through static toggles.
+     */
     public static function load(): void
     {
         $mocks = [

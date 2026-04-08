@@ -13,6 +13,9 @@ use yii\web\Application;
 /**
  * Creates Yii application instances for tests.
  *
+ * Provides a deterministic web application factory used by the PHPUnit suite to bootstrap a fresh
+ * {@see \yii\web\Application} per test with the Vue adapter wiring pre-configured.
+ *
  * @author Wilmer Arambula <terabytesoftw@gmail.com>
  * @since 0.1
  */
@@ -25,6 +28,9 @@ final class ApplicationFactory
 
     /**
      * Destroys the current application.
+     *
+     * Closes any open session bound to the current application and nulls out the {@see \Yii::$app} singleton so the
+     * next test starts from a clean state.
      */
     public static function destroy(): void
     {
@@ -38,7 +44,9 @@ final class ApplicationFactory
     /**
      * Creates a web application with the Vue bootstrap configured.
      *
-     * @param array<string, mixed> $override Configuration values to override the defaults with.
+     * @param array $override Configuration values to override the defaults from {@see commonBase()} with.
+     *
+     * @phpstan-param array<string, mixed> $override
      */
     public static function web(array $override = []): void
     {
@@ -48,7 +56,7 @@ final class ApplicationFactory
     /**
      * Returns the base configuration for a web application with the Vue bootstrap configured.
      *
-     * @return array Base configuration array for a web application with the Vue bootstrap configured.
+     * @return array Base configuration array ready to be merged with per-test overrides.
      *
      * @phpstan-return array<string, mixed>
      */

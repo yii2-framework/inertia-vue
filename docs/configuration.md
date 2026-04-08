@@ -7,7 +7,7 @@ bootstrap class registers it automatically when missing.
 
 ## Basic configuration
 
-Enable the package through the application bootstrap and configure the component:
+Enable the package through the application bootstrap and configure the component.
 
 ```php
 // config/web.php
@@ -21,7 +21,9 @@ return [
             'baseUrl' => '@web/build',
             'devMode' => YII_ENV_DEV,
             'devServerUrl' => 'http://localhost:5173',
-            'entrypoints' => ['resources/js/app.js'],
+            'entrypoints' => [
+                'resources/js/app.js',
+            ],
             'manifestPath' => '@webroot/build/.vite/manifest.json',
             'modulePreload' => true,
         ],
