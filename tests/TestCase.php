@@ -12,7 +12,7 @@ use yii\inertia\vue\tests\support\stub\MockerFunctions;
 use yii\web\Response;
 
 /**
- * Base test case for yii2-framework/inertia-vue tests.
+ * Base test case for inertia-vue tests.
  *
  * @author Wilmer Arambula <terabytesoftw@gmail.com>
  * @since 0.1

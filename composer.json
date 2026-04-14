@@ -1,5 +1,5 @@
 {
-    "name": "yii2-framework/inertia-vue",
+    "name": "yii2-extensions/inertia-vue",
     "type": "library",
     "description": "Vue adapter helpers for yii2.",
     "keywords": [
@@ -13,9 +13,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.2",
-        "yii2-framework/yii2": "^0.1@dev",
-        "yii2-framework/inertia": "^0.1@dev"
+        "php": ">=8.3",
+        "yiisoft/yii2": "^22.0@dev",
+        "yii2-extensions/inertia": "^0.1@dev"
     },
     "require-dev": {
         "infection/infection": "^0.32",

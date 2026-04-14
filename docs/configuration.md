@@ -2,7 +2,7 @@
 
 ## Overview
 
-`yii2-framework/inertia-vue` provides a Vite asset helper registered as the `inertiaVue` application component. The
+`yii2-extensions/inertia-vue` provides a Vite asset helper registered as the `inertiaVue` application component. The
 bootstrap class registers it automatically when missing.
 
 ## Basic configuration

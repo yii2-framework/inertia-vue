@@ -1,5 +1,5 @@
 <!-- Mobile version - single column -->
-<svg fill="none" viewBox="0 0 600 560" width="100%" height="560" xmlns="http://www.w3.org/2000/svg">
+<svg fill="none" viewBox="0 0 600 380" width="100%" height="380" xmlns="http://www.w3.org/2000/svg">
     <foreignObject width="100%" height="100%">
         <div xmlns="http://www.w3.org/1999/xhtml">
             <style>
@@ -46,28 +46,20 @@
             </style>
             <div class="container">
                 <div class="alert-box">
-                    <p class="alert-title"><strong>Vue Bootstrap</strong></p>
-                    <p class="alert-content">Drop-in Yii2 bootstrap class • Vue-aware root view • Inertia payload injection</p>
+                    <p class="alert-title"><strong>Inertia v3</strong></p>
+                    <p class="alert-content">Deferred, merge, once props • Partial reloads • CSRF cookie-to-header</p>
                 </div>
                 <div class="alert-box">
                     <p class="alert-title"><strong>Vite Integration</strong></p>
                     <p class="alert-content">Dev server tags • Manifest-driven production • modulepreload support</p>
                 </div>
                 <div class="alert-box">
+                    <p class="alert-title"><strong>Vue Bootstrap</strong></p>
+                    <p class="alert-content">Drop-in Yii2 bootstrap class • Vue-aware root view • Inertia payload injection</p>
+                </div>
+                <div class="alert-box">
                     <p class="alert-title"><strong>Zero Config</strong></p>
                     <p class="alert-content">Canonical yii\inertia\Vite renderer • No framework-specific preamble needed</p>
-                </div>
-                <div class="alert-box">
-                    <p class="alert-title"><strong>Inertia v3</strong></p>
-                    <p class="alert-content">Deferred, merge, once props • Partial reloads • CSRF cookie-to-header</p>
-                </div>
-                <div class="alert-box">
-                    <p class="alert-title"><strong>PHP 8.2+</strong></p>
-                    <p class="alert-content">Strict types • Readonly props • Enums • PHPStan Level Max ready</p>
-                </div>
-                <div class="alert-box">
-                    <p class="alert-title"><strong>Battle Tested</strong></p>
-                    <p class="alert-content">100% PHPUnit coverage • 100% Infection MSI • Super-Linter • StyleCI</p>
                 </div>
             </div>
         </div>

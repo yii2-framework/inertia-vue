@@ -9,7 +9,7 @@ use yii\base\BootstrapInterface;
 use yii\inertia\{Manager, Vite};
 
 /**
- * Bootstraps the Vue adapter for yii2-framework/inertia.
+ * Bootstraps the Vue adapter for inertia.
  *
  * Delegates the base Inertia bootstrap, registers the `@inertia-vue` alias, registers the canonical
  * {@see \yii\inertia\Vite} renderer under the `inertiaVue` component id (without any framework-specific preamble), and
