@@ -12,3 +12,4 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - docs: improve documentation clarity and consistency across multiple files.
 - chore: migrate package to `yii2-extensions` organization and raise minimum PHP requirement to `8.3`.
 - fix: simplify SVG structure and remove unnecessary foreignObject elements.
+- fix: correct SVG source order for responsive feature display in `README.md`.
