@@ -104,6 +104,24 @@ createInertiaApp({
 });
 ```
 
+## Development mode
+
+When `devMode` is `true`, the Vite helper bypasses the production manifest and emits `@vite/client` plus each
+`entrypoints` script pointing at `devServerUrl`. Vue HMR is carried natively by `@vite/client` together with
+`@vitejs/plugin-vue`; no extra preamble is needed.
+
+Run the Vite dev server and the Yii2 application side by side:
+
+```bash
+# Terminal 1 — Vite dev server
+npm run dev
+
+# Terminal 2 — Yii2 in dev mode
+YII_ENV=dev ./yii serve
+```
+
+See [Development Notes](docs/development.md) for the full HMR workflow, CORS notes, and troubleshooting.
+
 ## Production asset integration
 
 This package expects a Vite manifest file generated with `build.manifest = true`. In production it will render:
