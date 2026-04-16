@@ -43,28 +43,35 @@ YII_ENV=dev ./yii serve
 
 ### How the pieces connect
 
-1. `public/index.php` reads the `YII_ENV` environment variable. The application configuration should flip
-   `inertiaVue.devMode` based on that value (for example, `YII_ENV === 'dev'`).
-2. When `devMode` is `true`, `\yii\inertia\Vite::renderDevelopmentTags()` emits, in order:
+- `public/index.php` reads the `YII_ENV` environment variable. The application configuration should flip
+  `inertiaVue.devMode` based on that value (for example, `YII_ENV === 'dev'`).
+- When `devMode` is `true`, `\yii\inertia\Vite::renderDevelopmentTags()` emits, in order:
+  - `<script type="module" src="{devServerUrl}/@vite/client">`, which opens the Vite HMR WebSocket;
+  - `<script type="module" src="{devServerUrl}/{entrypoint}">` for each configured entrypoint.
+- Vite detects source changes, pushes module updates over the WebSocket, and `@vitejs/plugin-vue` performs Vue HMR on
+  single-file components while preserving local state. No framework preamble is required.
 
-- `<script type="module" src="{devServerUrl}/@vite/client">`, which opens the Vite HMR WebSocket;
-- `<script type="module" src="{devServerUrl}/{entrypoint}">` for each configured entrypoint.
-
-3. Vite detects source changes, pushes module updates over the WebSocket, and `@vitejs/plugin-vue` performs Vue HMR on
-   single-file components while preserving local state. No framework preamble is required.
-
-### CORS and `server.origin`
+### Cross-origin requests to the Vite dev server
 
 The PHP application and the Vite dev server run on different origins (typically `http://localhost:8080` and
-`http://localhost:5173`). Vite must advertise the dev server origin so the browser accepts cross-origin module
-imports. Configure `server.origin` in `vite.config.js` to match the `devServerUrl` value on the PHP side:
+`http://localhost:5173`), so the browser loads modules cross-origin. Two distinct Vite options govern this:
+
+- `server.origin` — only rewrites asset URLs emitted during development so that imports resolve to absolute URLs. It
+  does not affect CORS headers. Keep it in sync with `devServerUrl` on the PHP side.
+- `server.cors` — controls the CORS headers the Vite dev server actually sends. Vite's default allowlist accepts
+  requests from `localhost`, `127.0.0.1`, and `[::1]`, which is why a plain `localhost` setup works out of the box.
+
+For non-localhost setups (Docker hostnames, reverse proxies, tunnels, custom domains), the default allowlist does not
+match and module fetches will be blocked. Extend `server.cors` explicitly, for example:
 
 ```js
 // vite.config.js
 export default defineConfig({
-  // ...
   server: {
-    origin: "http://localhost:5173",
+    origin: "http://myapp.test:5173",
+    cors: {
+      origin: "http://myapp.test:8080",
+    },
   },
 });
 ```
