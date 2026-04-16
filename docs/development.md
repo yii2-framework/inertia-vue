@@ -46,8 +46,10 @@ YII_ENV=dev ./yii serve
 1. `public/index.php` reads the `YII_ENV` environment variable. The application configuration should flip
    `inertiaVue.devMode` based on that value (for example, `YII_ENV === 'dev'`).
 2. When `devMode` is `true`, `\yii\inertia\Vite::renderDevelopmentTags()` emits, in order:
-   - `<script type="module" src="{devServerUrl}/@vite/client">`, which opens the Vite HMR WebSocket;
-   - `<script type="module" src="{devServerUrl}/{entrypoint}">` for each configured entrypoint.
+
+- `<script type="module" src="{devServerUrl}/@vite/client">`, which opens the Vite HMR WebSocket;
+- `<script type="module" src="{devServerUrl}/{entrypoint}">` for each configured entrypoint.
+
 3. Vite detects source changes, pushes module updates over the WebSocket, and `@vitejs/plugin-vue` performs Vue HMR on
    single-file components while preserving local state. No framework preamble is required.
 
